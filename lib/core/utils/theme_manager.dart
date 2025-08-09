@@ -5,6 +5,8 @@ class ThemeManager {
     return ThemeData(
       brightness: Brightness.dark,
       useMaterial3: true,
+      fontFamily: 'Poppins',
+      
     );
   }
 

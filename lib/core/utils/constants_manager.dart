@@ -7,6 +7,6 @@ class ConstantsManager {
   static const double kCustomSearchIconWidth = 40;
   static const double kCustomSearchIconHeight = 40;
   
-  static const EdgeInsets kAppPadding =EdgeInsets.all(10);
+  static const EdgeInsets kAppPadding =EdgeInsets.symmetric(horizontal: 24,vertical: 10);
 
 }
