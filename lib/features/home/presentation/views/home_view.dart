@@ -10,9 +10,15 @@ class HomeView extends StatelessWidget {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          showModalBottomSheet(context: context, builder: (context) {
-            return AddNoteBottomSheet();
-          },);
+          showModalBottomSheet(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            context: context,
+            builder: (context) {
+              return AddNoteBottomSheet();
+            },
+          );
         },
         child: const Icon(Icons.add),
       ),
@@ -20,4 +26,3 @@ class HomeView extends StatelessWidget {
     );
   }
 }
-
