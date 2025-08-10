@@ -10,18 +10,9 @@ class AddNoteCubit extends Cubit<AddNoteState> {
   AddNoteCubit(this.addNoteUseCase) : super(AddNoteInitial());
 
   Future<void> addNote({
-    required String title,
-    required String note,
-    required String date,
-    required int color,
+    required NoteModel noteModel,
   }) async {
     emit(AddNoteLoading());
-    NoteModel noteModel = NoteModel(
-      title: title,
-      note: note,
-      date: date,
-      color: color,
-    );
 
     var result = await addNoteUseCase.call(noteModel);
     result.fold(
