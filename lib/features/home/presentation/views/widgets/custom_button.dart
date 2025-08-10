@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:notes_app_clean_arch/core/utils/colors_manager.dart';
+import 'package:notes_app_clean_arch/core/utils/strings_manager.dart';
 
 class CustomButton extends StatelessWidget {
   const CustomButton({super.key});
@@ -16,7 +17,7 @@ class CustomButton extends StatelessWidget {
         ),
       
       ),
-      child: Text('Add Note', style: TextStyle(color: Colors.black)),
+      child: Text(StringsManager.addNote, style: TextStyle(color: Colors.black)),
     );
   }
 }
