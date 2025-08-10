@@ -6,6 +6,7 @@ part 'add_note_state.dart';
 
 class AddNoteCubit extends Cubit<AddNoteState> {
   final AddNoteUseCase addNoteUseCase;
+  String msg = '';
   AddNoteCubit(this.addNoteUseCase) : super(AddNoteInitial());
 
   Future<void> addNote({
@@ -26,9 +27,11 @@ class AddNoteCubit extends Cubit<AddNoteState> {
     result.fold(
       (failure) {
         emit(AddNoteFailure(errMessage: failure.errMessage));
+        msg = failure.errMessage;
       },
       (msg) {
         emit(AddNoteSuccess(msg: msg));
+        msg = msg;
       },
     );
   }
