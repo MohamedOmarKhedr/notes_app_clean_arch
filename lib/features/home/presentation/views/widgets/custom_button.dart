@@ -3,12 +3,13 @@ import 'package:notes_app_clean_arch/core/utils/colors_manager.dart';
 import 'package:notes_app_clean_arch/core/utils/strings_manager.dart';
 
 class CustomButton extends StatelessWidget {
-  const CustomButton({super.key});
+  final void Function()? onPressed;
+  const CustomButton({super.key,required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: () {},
+      onPressed: onPressed,
       style: TextButton.styleFrom(
         backgroundColor: ColorsManager.primary,
         minimumSize: Size(MediaQuery.of(context).size.width, 50),

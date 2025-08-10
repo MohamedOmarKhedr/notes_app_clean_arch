@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 
 class ConstantsManager {
   
-  static const double kNotesAppBarHeight = 40;
-  static const double kCustomSearchIconBorderRadius = 12;
-  static const double kCustomSearchIconWidth = 40;
-  static const double kCustomSearchIconHeight = 40;
+  static const String notesBox = 'notes_box';
+  
+
   
   static const EdgeInsets kAppPadding =EdgeInsets.symmetric(horizontal: 24,vertical: 10);
 
