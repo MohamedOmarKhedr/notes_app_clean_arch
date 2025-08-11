@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:notes_app_clean_arch/features/home/data/models/note_model.dart';
 import 'package:notes_app_clean_arch/features/home/presentation/manager/add_note_cubit/add_note_cubit.dart';
 import 'package:notes_app_clean_arch/features/home/presentation/views/widgets/custom_button.dart';
@@ -42,7 +43,7 @@ class _AddNoteFormState extends State<AddNoteForm> {
             hintText: 'Content Note',
             maxLines: 5,
             onSaved: (value) {
-              title = value;
+              note = value;
             },
           ),
           SizedBox(height: 30),
@@ -53,11 +54,12 @@ class _AddNoteFormState extends State<AddNoteForm> {
                 onPressed: () {
                   if (formKey.currentState!.validate()) {
                     formKey.currentState!.save();
+                    var dateFormat = DateFormat('dd-mm-yyyy').format(DateTime.now());
               
                     var noteModel = NoteModel(
                       title: title ?? '',
                       note: note ?? '',
-                      date: DateTime.now().toString(),
+                      date: dateFormat.toString(),
                       color: Colors.blue.toARGB32(),
                     );
                     addNoteCubit.addNote(noteModel: noteModel);
