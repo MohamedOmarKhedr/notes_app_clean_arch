@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:notes_app_clean_arch/features/home/data/models/note_model.dart';
 import 'package:notes_app_clean_arch/features/home/presentation/manager/add_note_cubit/add_note_cubit.dart';
+import 'package:notes_app_clean_arch/features/home/presentation/views/widgets/color_list_view.dart';
 import 'package:notes_app_clean_arch/features/home/presentation/views/widgets/custom_button.dart';
 import 'package:notes_app_clean_arch/features/home/presentation/views/widgets/custom_text_field.dart';
 
@@ -41,26 +42,30 @@ class _AddNoteFormState extends State<AddNoteForm> {
           SizedBox(height: 12),
           CustomTextField(
             hintText: 'Content Note',
-            maxLines: 5,
+            minLines: 5,
             onSaved: (value) {
               note = value;
             },
           ),
-          SizedBox(height: 30),
-          BlocBuilder<AddNoteCubit,AddNoteState>(
-            builder: (context,state) {
+          SizedBox(height: 12),
+          ColorListView(),
+          SizedBox(height: 15),
+          BlocBuilder<AddNoteCubit, AddNoteState>(
+            builder: (context, state) {
               return CustomButton(
                 isLoading: state is AddNoteLoading,
                 onPressed: () {
                   if (formKey.currentState!.validate()) {
                     formKey.currentState!.save();
-                    var dateFormat = DateFormat('dd-mm-yyyy').format(DateTime.now());
-              
+                    var dateFormat = DateFormat(
+                      'dd-MM-yyyy',
+                    ).format(DateTime.now());
+
                     var noteModel = NoteModel(
                       title: title ?? '',
                       note: note ?? '',
                       date: dateFormat.toString(),
-                      color: Colors.blue.toARGB32(),
+                      color: addNoteCubit.currentColor.toARGB32(),
                     );
                     addNoteCubit.addNote(noteModel: noteModel);
                   } else {
@@ -68,11 +73,13 @@ class _AddNoteFormState extends State<AddNoteForm> {
                   }
                 },
               );
-            }
+            },
           ),
-          SizedBox(height: 16),
+          SizedBox(height: 15),
         ],
       ),
     );
   }
 }
+
+

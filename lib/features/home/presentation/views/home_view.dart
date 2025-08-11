@@ -11,6 +11,7 @@ class HomeView extends StatelessWidget {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: ColorsManager.primary,
+        foregroundColor: Colors.black12,
         onPressed: () {
           showModalBottomSheet(
             // to fix Keyboard scroll
@@ -24,7 +25,7 @@ class HomeView extends StatelessWidget {
             },
           );
         },
-        child: const Icon(Icons.add),
+        child: const Icon(Icons.add,color: Colors.black,),
       ),
       body: const HomeViewBody(),
     );

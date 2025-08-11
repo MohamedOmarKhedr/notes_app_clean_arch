@@ -3,11 +3,12 @@ import 'package:notes_app_clean_arch/core/utils/colors_manager.dart';
 
 class CustomTextField extends StatelessWidget {
   final String hintText;
+  final int? minLines;
   final int? maxLines;
   final TextEditingController? controller;
   final void Function(String?)? onSaved;
   final void Function(String)? onChanged;
-  const CustomTextField({super.key,required this.hintText, this.maxLines = 1, this.onSaved, this.onChanged, this.controller});
+  const CustomTextField({super.key,required this.hintText, this.minLines = 1, this.onSaved, this.onChanged, this.controller,this.maxLines});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,8 @@ class CustomTextField extends StatelessWidget {
         }
         return null;
       },
-      maxLines: maxLines,
+      minLines: minLines,
+      maxLines:maxLines,
       cursorColor: ColorsManager.primary,
       decoration: InputDecoration(
         hintText: hintText,

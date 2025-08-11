@@ -76,7 +76,7 @@ class _EditNoteViewBodyState extends State<EditNoteViewBody> {
             CustomTextField(
               hintText: 'Note Content',
               controller: noteController,
-              maxLines: 5,
+              minLines: 5,
               onChanged: (value) {
                 note = value;
               },
