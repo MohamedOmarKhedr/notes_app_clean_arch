@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:notes_app_clean_arch/core/utils/colors_manager.dart';
 import 'package:notes_app_clean_arch/core/utils/strings_manager.dart';
+import 'package:notes_app_clean_arch/core/widgets/custom_loading_indicator.dart';
 
 class CustomButton extends StatelessWidget {
   final void Function()? onPressed;
-  const CustomButton({super.key,required this.onPressed});
+  final bool isLoading;
+  const CustomButton({super.key,required this.onPressed,this.isLoading = false});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +20,7 @@ class CustomButton extends StatelessWidget {
         ),
       
       ),
-      child: Text(StringsManager.addNote, style: TextStyle(color: Colors.black)),
+      child: isLoading? CustomLoadingIndicator() :Text(StringsManager.addNote, style: TextStyle(color: Colors.black)),
     );
   }
 }

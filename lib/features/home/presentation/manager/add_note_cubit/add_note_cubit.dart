@@ -6,23 +6,18 @@ part 'add_note_state.dart';
 
 class AddNoteCubit extends Cubit<AddNoteState> {
   final AddNoteUseCase addNoteUseCase;
-  String msg = '';
   AddNoteCubit(this.addNoteUseCase) : super(AddNoteInitial());
 
-  Future<void> addNote({
-    required NoteModel noteModel,
-  }) async {
+  Future<void> addNote({required NoteModel noteModel}) async {
     emit(AddNoteLoading());
 
     var result = await addNoteUseCase.call(noteModel);
     result.fold(
       (failure) {
         emit(AddNoteFailure(errMessage: failure.errMessage));
-        msg = failure.errMessage;
       },
       (msg) {
-        emit(AddNoteSuccess(msg: msg));
-        msg = msg;
+        emit(AddNoteSuccess());
       },
     );
   }

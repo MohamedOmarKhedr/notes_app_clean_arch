@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:notes_app_clean_arch/core/utils/text_style_manager.dart';
+import 'package:notes_app_clean_arch/features/home/data/models/note_model.dart';
 import 'package:notes_app_clean_arch/features/home/presentation/views/edit_note_view.dart';
 
 class NoteItem extends StatelessWidget {
-  const NoteItem({super.key});
+  final NoteModel note;
+  const NoteItem({super.key, required this.note});
 
   @override
   Widget build(BuildContext context) {
+    
     return GestureDetector(
       onTap: () {
         Navigator.push(context,MaterialPageRoute(builder: (context) => const EditNoteView(),));
@@ -15,7 +18,7 @@ class NoteItem extends StatelessWidget {
         margin: const EdgeInsets.symmetric(vertical: 6.0),
         padding: const EdgeInsets.only(bottom: 12.0),
         decoration: BoxDecoration(
-          color: Colors.amber,
+          color: Color(note.color),
           borderRadius: BorderRadius.circular(12),
         ),
         child: Column(
@@ -25,17 +28,17 @@ class NoteItem extends StatelessWidget {
               child: ListTile(
                 title: Padding(
                   padding: const EdgeInsets.only(bottom:12.0),
-                  child: Text('Flutter Tips',style: TextStyleManager.noteTitleTextStyle,),
+                  child: Text(note.title,style: TextStyleManager.noteTitleTextStyle,),
                 ),
                 textColor: Colors.black,
                 iconColor: Colors.black,
-                subtitle: Text('Build Your Career With Us. Build Your Career With Us', style: TextStyleManager.noteContentTitleTextStyle,),
+                subtitle: Text(note.note, style: TextStyleManager.noteContentTitleTextStyle,),
                 trailing: IconButton(onPressed: () {}, icon: Icon(Icons.delete)),
               ),
             ),
             Align(alignment: Alignment.bottomRight, child: Padding(
               padding: const EdgeInsets.only(right:24),
-              child: Text('May 21,2022',style: TextStyleManager.noteHistoryTitleTextStyle,),
+              child: Text(note.date,style: TextStyleManager.noteHistoryTitleTextStyle,),
             )),
           ],
         ),

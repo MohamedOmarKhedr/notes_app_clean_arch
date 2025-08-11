@@ -6,8 +6,6 @@
   import 'package:notes_app_clean_arch/core/utils/simple_bloc_obserrver.dart';
   import 'package:notes_app_clean_arch/core/utils/theme_manager.dart';
   import 'package:notes_app_clean_arch/features/home/data/models/note_model.dart';
-  import 'package:notes_app_clean_arch/features/home/domain/use_cases/add_note_use_case.dart';
-  import 'package:notes_app_clean_arch/features/home/presentation/manager/add_note_cubit/add_note_cubit.dart';
   import 'package:notes_app_clean_arch/features/home/presentation/views/home_view.dart';
 
   void main() async {

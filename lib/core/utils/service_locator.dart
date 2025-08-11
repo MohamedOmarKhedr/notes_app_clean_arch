@@ -7,16 +7,24 @@ import 'package:notes_app_clean_arch/features/home/data/data_source/local_data_s
 import 'package:notes_app_clean_arch/features/home/data/models/note_model.dart';
 import 'package:notes_app_clean_arch/features/home/data/repos/home_repo_impl.dart';
 import 'package:notes_app_clean_arch/features/home/domain/use_cases/add_note_use_case.dart';
+import 'package:notes_app_clean_arch/features/home/domain/use_cases/get_notes_use_case.dart';
 
 final getit = GetIt.instance;
 
 void setupServiceLocator() {
-
-  getit.registerSingleton<AddNoteUseCase>(AddNoteUseCase(
-            homeRepo: HomeRepoImpl(
+  getit.registerSingleton<HomeRepoImpl>(HomeRepoImpl(
               localDataSource: LocalDataSourceImpl(
                 notesBox: Hive.box<NoteModel>(ConstantsManager.notesBox),
               ),
-            ),
+            ));
+
+  getit.registerSingleton<AddNoteUseCase>(AddNoteUseCase(
+            homeRepo: getit.get<HomeRepoImpl>(),
+          ),);
+
+  getit.registerSingleton<GetNotesUseCase>(GetNotesUseCase(
+            homeRepo: getit.get<HomeRepoImpl>(),
           ),);
   }
+
+
