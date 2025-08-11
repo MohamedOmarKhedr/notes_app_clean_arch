@@ -8,14 +8,14 @@ class ColorsManager {
 
   // color palette 
 
-  static const Color color1 = Color(0xff9e0031);
-  static const Color color2 = Color(0xff8e0045);
-  static const Color color3 = Color(0xff770058);
-  static const Color color4 = Color(0xff600047);
-  static const Color color5 = Color(0xff44001a);
-  static const Color color6 = Color(0xff540d6e);
-  static const Color color7 = Color(0xffEE4266);
+  static const Color color1 = Color.fromARGB(255, 247, 178, 200);
+  static const Color color2 = Color.fromARGB(255, 192, 129, 161);
+  static const Color color3 = Color.fromARGB(255, 167, 68, 140);
+  static const Color color4 = Color.fromARGB(255, 77, 92, 156);
+  static const Color color5 = Color.fromARGB(255, 56, 108, 133);
+  static const Color color6 = Color.fromARGB(255, 138, 76, 160);
+  static const Color color7 = Color.fromARGB(255, 224, 109, 134);
   static const Color color8 = Color(0xffffd23f);
   static const Color color9 = Color(0xfff3fcf0);
-  static const Color color10 = Color(0xff1f271b);
+  static const Color color10 = Color.fromARGB(255, 70, 94, 58);
 }

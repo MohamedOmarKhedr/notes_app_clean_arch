@@ -47,41 +47,43 @@ class _EditNoteViewBodyState extends State<EditNoteViewBody> {
       },
       child: Padding(
         padding: ConstantsManager.kAppPadding,
-        child: Column(
-          children: [
-            const SizedBox(height: 40),
-            CustomAppBar(
-              title: StringsManager.editNote,
-              icon: Icons.check,
-              onPressed: () {
-                NoteModel noteModel = NoteModel(
-                  title: title,
-                  note: note,
-                  color: widget.note.color,
-                  date: widget.note.date,
-                  id: widget.note.key,
-                );
-                updateNoteCubit.updateNote(note: noteModel);
-              },
-            ),
-            const SizedBox(height: 40),
-            CustomTextField(
-              hintText: 'Title',
-              controller: titleController,
-              onChanged: (value) {
-                title = value;
-              },
-            ),
-            const SizedBox(height: 12),
-            CustomTextField(
-              hintText: 'Note Content',
-              controller: noteController,
-              minLines: 5,
-              onChanged: (value) {
-                note = value;
-              },
-            ),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              const SizedBox(height: 40),
+              CustomAppBar(
+                title: StringsManager.editNote,
+                icon: Icons.check,
+                onPressed: () {
+                  NoteModel noteModel = NoteModel(
+                    title: title,
+                    note: note,
+                    color: widget.note.color,
+                    date: widget.note.date,
+                    id: widget.note.key,
+                  );
+                  updateNoteCubit.updateNote(note: noteModel);
+                },
+              ),
+              const SizedBox(height: 40),
+              CustomTextField(
+                hintText: 'Title',
+                controller: titleController,
+                onChanged: (value) {
+                  title = value;
+                },
+              ),
+              const SizedBox(height: 12),
+              CustomTextField(
+                hintText: 'Note Content',
+                controller: noteController,
+                minLines: 5,
+                onChanged: (value) {
+                  note = value;
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

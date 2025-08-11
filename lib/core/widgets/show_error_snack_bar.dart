@@ -34,7 +34,7 @@ class ShowCustomSnackBar {
   }
 
   /// لعرض رسالة خطأ (عادةً باللون الأحمر). 🚫
-  static void showError({required BuildContext context, required String message,Duration duration = const Duration(seconds: 10)}) {
+  static void showError({required BuildContext context, required String message,Duration duration = const Duration(seconds: 5)}) {
     _showSnackBar(
       context: context,
       message: message,
@@ -44,7 +44,7 @@ class ShowCustomSnackBar {
   }
 
   /// لعرض رسالة تحذير (عادةً باللون البرتقالي أو الأصفر الداكن). ⚠️
-  static void showWarning({required BuildContext context, required String message,Duration duration = const Duration(seconds: 10)}) {
+  static void showWarning({required BuildContext context, required String message,Duration duration = const Duration(seconds: 5)}) {
     _showSnackBar(
       context: context,
       message: message,
@@ -54,7 +54,7 @@ class ShowCustomSnackBar {
   }
 
   /// لعرض رسالة نجاح (عادةً باللون الأخضر). ✅
-  static void showSuccess({required BuildContext context, required String message,Duration duration = const Duration(seconds: 10)}) {
+  static void showSuccess({required BuildContext context, required String message,Duration duration = const Duration(seconds: 5)}) {
     _showSnackBar(
       context: context,
       message: message,
@@ -64,7 +64,7 @@ class ShowCustomSnackBar {
   }
 
   /// لعرض رسالة معلومات أو تنبيه عام (عادةً باللون الأزرق أو الرمادي الداكن). ℹ️
-  static void showInfo({required BuildContext context, required String message,Duration duration = const Duration(seconds: 10)}) {
+  static void showInfo({required BuildContext context, required String message,Duration duration = const Duration(seconds: 5)}) {
     _showSnackBar(
       context: context,
       message: message,
