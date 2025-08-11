@@ -11,12 +11,17 @@ class HomeViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: ConstantsManager.kAppPadding,
-      child: const Column(children: [
-      SizedBox(height: 20),
-       CustomAppBar(title: StringsManager.appName,icon: Icons.search,),
-       Expanded(child: NotesListView())
-       
-       ]),
+      child: Column(
+        children: [
+          const SizedBox(height: 20),
+          CustomAppBar(
+            title: StringsManager.appName,
+            icon: Icons.search,
+            onPressed: () {},
+          ),
+          const Expanded(child: NotesListView()),
+        ],
+      ),
     );
   }
 }

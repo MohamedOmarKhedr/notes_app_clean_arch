@@ -6,24 +6,16 @@ abstract class LocalDataSource {
   Future<List<NoteModel>> getAllNotes();
   Future<Unit> addNote(NoteModel note);
   Future<Unit> updateNote(NoteModel note);
-  Future<Unit> deleteNote(String noteId);
 }
 
-class LocalDataSourceImpl extends LocalDataSource{
+class LocalDataSourceImpl extends LocalDataSource {
   final Box<NoteModel> notesBox;
 
   LocalDataSourceImpl({required this.notesBox});
   @override
   Future<Unit> addNote(NoteModel note) async {
     await notesBox.add(note);
-   return unit;
-     
-  }
-
-  @override
-  Future<Unit> deleteNote(String noteId) {
-    // TODO: implement deleteNote
-    throw UnimplementedError();
+    return unit;
   }
 
   @override
@@ -33,9 +25,8 @@ class LocalDataSourceImpl extends LocalDataSource{
   }
 
   @override
-  Future<Unit> updateNote(NoteModel note) {
-    // TODO: implement updateNote
-    throw UnimplementedError();
+  Future<Unit> updateNote(NoteModel note) async {
+    await notesBox.put(note.id, note);
+    return unit;
   }
-
 }

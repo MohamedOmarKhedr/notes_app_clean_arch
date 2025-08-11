@@ -4,13 +4,17 @@ import 'package:notes_app_clean_arch/core/utils/colors_manager.dart';
 class CustomTextField extends StatelessWidget {
   final String hintText;
   final int? maxLines;
+  final TextEditingController? controller;
   final void Function(String?)? onSaved;
-  const CustomTextField({super.key,required this.hintText, this.maxLines = 1, this.onSaved});
+  final void Function(String)? onChanged;
+  const CustomTextField({super.key,required this.hintText, this.maxLines = 1, this.onSaved, this.onChanged, this.controller});
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
       onSaved: onSaved,
+      onChanged: onChanged,
       validator: (value) {
         if (value?.isEmpty ?? true) {
           return 'Field is required';

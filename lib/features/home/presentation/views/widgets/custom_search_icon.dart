@@ -3,7 +3,8 @@ import 'package:notes_app_clean_arch/core/utils/colors_manager.dart';
 
 class CustomSearchIcon extends StatelessWidget {
   final IconData icon;
-  const CustomSearchIcon({super.key, required this.icon});
+  final void Function()? onPressed;
+  const CustomSearchIcon({super.key, required this.icon,required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,7 @@ class CustomSearchIcon extends StatelessWidget {
       ),
       child: Center(
         child: IconButton(
-          onPressed: () {},
+          onPressed: onPressed,
           color: Colors.white,
           icon: Icon(icon, size: 28),
         ),

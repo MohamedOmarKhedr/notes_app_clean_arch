@@ -36,14 +36,15 @@ class HomeRepoImpl extends HomeRepo {
   }
 
   @override
-  Future<Either<Failure, Unit>> deleteNote(String noteId) {
-    // TODO: implement deleteNote
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<Either<Failure, Unit>> updateNote(NoteModel note) {
-    // TODO: implement updateNote
-    throw UnimplementedError();
+  Future<Either<Failure, Unit>> updateNote(NoteModel note) async{
+    try {
+       await localDataSource.updateNote(note);
+       return right(unit);
+    }catch (e) {
+      if(e is HiveError) {
+        return left(LocalDataFailure.fromHiveError(e));
+      }
+      return left(LocalDataFailure(e.toString()));
+    }
   }
 }

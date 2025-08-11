@@ -5,14 +5,15 @@ import 'package:notes_app_clean_arch/features/home/presentation/views/widgets/cu
 class CustomAppBar extends StatelessWidget {
   final IconData icon;
   final String title;
-  const CustomAppBar({super.key, required this.title, required this.icon});
+  final void Function()? onPressed;
+  const CustomAppBar({super.key, required this.title, required this.icon,required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
     return Row(children: [
       Text(title,style: TextStyleManager.appNameTextStyle,),
       Spacer(),
-      CustomSearchIcon(icon: icon,),
+      CustomSearchIcon(icon: icon, onPressed: onPressed,),
       
     ],);
   }

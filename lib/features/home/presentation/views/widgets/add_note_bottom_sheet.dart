@@ -30,8 +30,8 @@ class AddNoteBottomSheet extends StatelessWidget {
                 message: state.errMessage,
               );
             } else if (state is AddNoteSuccess) {
-              BlocProvider.of<GetNotesCubit>(context).getAllNotes();
               Navigator.pop(context);
+              BlocProvider.of<GetNotesCubit>(context).getAllNotes();
               ShowCustomSnackBar.showSuccess(
                 context: context,
                 message: 'Add note successfully',
