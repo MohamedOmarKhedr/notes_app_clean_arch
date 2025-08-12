@@ -12,14 +12,17 @@ class NoteModel extends HiveObject{
   @HiveField(3)
   int color;
   @HiveField(4)
-  int? id;
+  final int id;
+  @HiveField(5)
+  final int? noteKey;
 
   NoteModel({
     required this.title,
     required this.note,
     required this.date,
     required this.color,
-    this.id,
+    required this.id,
+    this.noteKey
   });
 
   

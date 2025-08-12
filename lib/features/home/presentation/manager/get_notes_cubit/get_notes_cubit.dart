@@ -8,14 +8,43 @@ class GetNotesCubit extends Cubit<GetNotesState> {
   GetNotesCubit(this.getNotesUseCase) : super(GetNotesInitial());
   final GetNotesUseCase getNotesUseCase;
 
-  Future<void> getAllNotes() async {
-    emit(GetNotesLoading());
-    var result = await getNotesUseCase.call();
-    result.fold((failure){
-      emit(GetNotesFailure(errMessage: failure.errMessage));
-    }, (notes){
-      emit(GetNotesSuccess(notes: notes));
-    });
+  int currentPageIndex = 0;
+  List<NoteModel> notes = [];
 
+  Future<void> getAllNotes({int pageNumber = 0}) async {
+    emit(GetNotesLoading());
+    if (pageNumber == 0) {
+      notes.clear();
+      currentPageIndex = 1;
+    }
+
+    var result = await getNotesUseCase.call(pageNumber);
+    result.fold(
+      (failure) {
+        emit(GetNotesFailure(errMessage: failure.errMessage));
+      },
+      (notes) {
+        this.notes.addAll(notes);
+        emit(GetNotesSuccess(notes: this.notes));
+      },
+    );
+  }
+
+  // 🆕 دالة لإزالة ملاحظة محليًا من القائمة
+  void removeNoteLocally(NoteModel note) {
+    notes.remove(note);
+    emit(GetNotesSuccess(notes: notes));
+  }
+ 
+ //for local update notes
+  void refreshList() {
+    emit(
+      GetNotesSuccess(notes: notes),
+    ); // إعادة إصدار نفس البيانات لتحديث الواجهة
+  }
+  //for add update notes
+  void addNoteLocally(NoteModel newNote) {
+  notes.add(newNote); 
+  emit(GetNotesSuccess(notes: notes));
 }
 }

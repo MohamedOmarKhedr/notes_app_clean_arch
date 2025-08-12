@@ -4,6 +4,7 @@ import 'package:notes_app_clean_arch/core/utils/constants_manager.dart';
 import 'package:notes_app_clean_arch/core/utils/strings_manager.dart';
 import 'package:notes_app_clean_arch/core/widgets/show_error_snack_bar.dart';
 import 'package:notes_app_clean_arch/features/home/data/models/note_model.dart';
+import 'package:notes_app_clean_arch/features/home/presentation/manager/get_notes_cubit/get_notes_cubit.dart';
 import 'package:notes_app_clean_arch/features/home/presentation/manager/update_note_cubit/update_note_cubit.dart';
 import 'package:notes_app_clean_arch/features/home/presentation/views/widgets/custom_app_bar.dart';
 import 'package:notes_app_clean_arch/features/home/presentation/views/widgets/custom_text_field.dart';
@@ -22,6 +23,7 @@ class _EditNoteViewBodyState extends State<EditNoteViewBody> {
   late String title;
   late String note;
   late UpdateNoteCubit updateNoteCubit;
+  late NoteModel updatedNote;
   @override
   void initState() {
     title = widget.note.title;
@@ -36,8 +38,14 @@ class _EditNoteViewBodyState extends State<EditNoteViewBody> {
   Widget build(BuildContext context) {
     return BlocListener<UpdateNoteCubit, UpdateNoteState>(
       listener: (context, state) {
-        if(state is UpdateNoteSuccess){
-          updateNoteCubit.afterUpdateNoteSuccess(context);
+        if (state is UpdateNoteSuccess) {
+          Navigator.pop(context);
+          GetNotesCubit getNotesCubit = BlocProvider.of<GetNotesCubit>(context);
+          getNotesCubit.refreshList();
+          ShowCustomSnackBar.showInfo(
+            context: context,
+            message: 'The note has been updated successfully',
+          );
         } else if (state is UpdateNoteFailure) {
           ShowCustomSnackBar.showError(
             context: context,
@@ -55,14 +63,10 @@ class _EditNoteViewBodyState extends State<EditNoteViewBody> {
                 title: StringsManager.editNote,
                 icon: Icons.check,
                 onPressed: () {
-                  NoteModel noteModel = NoteModel(
-                    title: title,
-                    note: note,
-                    color: widget.note.color,
-                    date: widget.note.date,
-                    id: widget.note.key,
-                  );
-                  updateNoteCubit.updateNote(note: noteModel);
+                  widget.note.title = titleController.text;
+                  widget.note.note = noteController.text;
+                  updatedNote = widget.note;
+                  updateNoteCubit.updateNote(note: widget.note);
                 },
               ),
               const SizedBox(height: 40),

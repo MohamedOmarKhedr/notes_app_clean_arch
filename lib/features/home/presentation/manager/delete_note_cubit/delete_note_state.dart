@@ -15,4 +15,3 @@ final class DeleteNoteFailure extends DeleteNoteState {
 }
 
 final class AfterDeleteNoteSuccess extends DeleteNoteState {}
-

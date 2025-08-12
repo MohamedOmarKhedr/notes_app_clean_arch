@@ -1,9 +1,6 @@
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:notes_app_clean_arch/core/widgets/show_error_snack_bar.dart';
 import 'package:notes_app_clean_arch/features/home/data/models/note_model.dart';
 import 'package:notes_app_clean_arch/features/home/domain/use_cases/update_note_use_case.dart';
-import 'package:notes_app_clean_arch/features/home/presentation/manager/get_notes_cubit/get_notes_cubit.dart';
 
 part 'update_note_state.dart';
 
@@ -25,13 +22,5 @@ class UpdateNoteCubit extends Cubit<UpdateNoteState> {
     );
   }
 
-  void afterUpdateNoteSuccess(BuildContext context) {
-    Navigator.pop(context);
-    BlocProvider.of<GetNotesCubit>(context).getAllNotes();
-    ShowCustomSnackBar.showInfo(
-      context: context,
-      message: 'The note has been updated successfully',
-    );
-    emit(AfterUpdateNoteSuccess());
-  }
+  
 }

@@ -4,7 +4,6 @@ import 'package:notes_app_clean_arch/core/utils/service_locator.dart';
 import 'package:notes_app_clean_arch/core/widgets/show_error_snack_bar.dart';
 import 'package:notes_app_clean_arch/features/home/domain/use_cases/add_note_use_case.dart';
 import 'package:notes_app_clean_arch/features/home/presentation/manager/add_note_cubit/add_note_cubit.dart';
-import 'package:notes_app_clean_arch/features/home/presentation/manager/get_notes_cubit/get_notes_cubit.dart';
 import 'package:notes_app_clean_arch/features/home/presentation/views/widgets/add_note_form.dart';
 
 class AddNoteBottomSheet extends StatelessWidget {
@@ -31,7 +30,6 @@ class AddNoteBottomSheet extends StatelessWidget {
               );
             } else if (state is AddNoteSuccess) {
               Navigator.pop(context);
-              BlocProvider.of<GetNotesCubit>(context).getAllNotes();
               ShowCustomSnackBar.showSuccess(
                 context: context,
                 message: 'Add note successfully',

@@ -10,9 +10,9 @@ class HomeRepoImpl extends HomeRepo {
 
   HomeRepoImpl({required this.localDataSource});
   @override
-  Future<Either<Failure, List<NoteModel>>> getAllNotes() async {
+  Future<Either<Failure, List<NoteModel>>> getAllNotes(int pageNumber) async {
     try {
-       var notes =await localDataSource.getAllNotes();
+       var notes =await localDataSource.getAllNotes(pageNumber);
        return right(notes);
     }catch (e) {
       if(e is HiveError) {

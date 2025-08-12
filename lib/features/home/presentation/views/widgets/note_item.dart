@@ -6,6 +6,7 @@ import 'package:notes_app_clean_arch/core/widgets/custom_alert_dialog.dart';
 import 'package:notes_app_clean_arch/features/home/data/models/note_model.dart';
 import 'package:notes_app_clean_arch/features/home/domain/use_cases/update_note_use_case.dart';
 import 'package:notes_app_clean_arch/features/home/presentation/manager/delete_note_cubit/delete_note_cubit.dart';
+import 'package:notes_app_clean_arch/features/home/presentation/manager/get_notes_cubit/get_notes_cubit.dart';
 import 'package:notes_app_clean_arch/features/home/presentation/manager/update_note_cubit/update_note_cubit.dart';
 import 'package:notes_app_clean_arch/features/home/presentation/views/edit_note_view.dart';
 
@@ -24,6 +25,7 @@ class _NoteItemState extends State<NoteItem> {
     deleteNoteCubit = BlocProvider.of<DeleteNoteCubit>(context);
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -71,10 +73,14 @@ class _NoteItemState extends State<NoteItem> {
                       title: 'Confirmation',
                       message: 'Do you want to delete this note?',
                       onConfirm: () {
-                        deleteNoteCubit.deleteNote(noteId: widget.note.key as int);
+                        deleteNoteCubit.deleteNote(note: widget.note);
+                        if (context.mounted) {
+                          context.read<GetNotesCubit>().removeNoteLocally(
+                            widget.note,
+                          );
+                        }
                       },
                     );
-                    
                   },
                   icon: Icon(Icons.delete),
                 ),

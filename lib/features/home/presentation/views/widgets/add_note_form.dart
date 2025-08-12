@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:notes_app_clean_arch/features/home/data/models/note_model.dart';
 import 'package:notes_app_clean_arch/features/home/presentation/manager/add_note_cubit/add_note_cubit.dart';
+import 'package:notes_app_clean_arch/features/home/presentation/manager/get_notes_cubit/get_notes_cubit.dart';
 import 'package:notes_app_clean_arch/features/home/presentation/views/widgets/color_list_view.dart';
 import 'package:notes_app_clean_arch/features/home/presentation/views/widgets/custom_button.dart';
 import 'package:notes_app_clean_arch/features/home/presentation/views/widgets/custom_text_field.dart';
@@ -19,9 +20,11 @@ class _AddNoteFormState extends State<AddNoteForm> {
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
   String? title, note;
   late AddNoteCubit addNoteCubit;
+  late GetNotesCubit getNotesCubit;
   @override
   void initState() {
     addNoteCubit = BlocProvider.of<AddNoteCubit>(context);
+    getNotesCubit = BlocProvider.of<GetNotesCubit>(context);
     super.initState();
   }
 
@@ -66,8 +69,11 @@ class _AddNoteFormState extends State<AddNoteForm> {
                       note: note ?? '',
                       date: dateFormat.toString(),
                       color: addNoteCubit.currentColor.toARGB32(),
+                      id: DateTime.now().microsecondsSinceEpoch,
                     );
                     addNoteCubit.addNote(noteModel: noteModel);
+                    GetNotesCubit getNotesCubit = BlocProvider.of<GetNotesCubit>(context);
+                    getNotesCubit.addNoteLocally(noteModel);
                   } else {
                     autovalidateMode = AutovalidateMode.always;
                   }
