@@ -44,7 +44,7 @@ class GetNotesCubit extends Cubit<GetNotesState> {
   }
   //for add update notes
   void addNoteLocally(NoteModel newNote) {
-  notes.add(newNote); 
+  notes.insert(0,newNote); 
   emit(GetNotesSuccess(notes: notes));
 }
 }

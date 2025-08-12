@@ -69,7 +69,6 @@ class _AddNoteFormState extends State<AddNoteForm> {
                       note: note ?? '',
                       date: dateFormat.toString(),
                       color: addNoteCubit.currentColor.toARGB32(),
-                      id: DateTime.now().microsecondsSinceEpoch,
                     );
                     addNoteCubit.addNote(noteModel: noteModel);
                     GetNotesCubit getNotesCubit = BlocProvider.of<GetNotesCubit>(context);
