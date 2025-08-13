@@ -13,7 +13,7 @@ class HomeView extends StatelessWidget {
         backgroundColor: ColorsManager.primary,
         foregroundColor: Colors.black12,
         onPressed: () {
-          showModalBottomSheet(
+          showModalBottomSheet<AddNoteBottomSheet>(
             // to fix Keyboard scroll
             isScrollControlled: true,
             shape: RoundedRectangleBorder(
@@ -21,7 +21,7 @@ class HomeView extends StatelessWidget {
             ),
             context: context,
             builder: (context) {
-              return AddNoteBottomSheet();
+              return const AddNoteBottomSheet();
             },
           );
         },

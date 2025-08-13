@@ -29,20 +29,26 @@ class _AddNoteFormState extends State<AddNoteForm> {
   }
 
   @override
+  void dispose() {
+    addNoteCubit.close();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Form(
       key: formKey,
       autovalidateMode: autovalidateMode,
       child: Column(
         children: [
-          SizedBox(height: 12),
+          const SizedBox(height: 12),
           CustomTextField(
             hintText: 'Title',
             onSaved: (value) {
               title = value;
             },
           ),
-          SizedBox(height: 12),
+          const SizedBox(height: 12),
           CustomTextField(
             hintText: 'Content Note',
             minLines: 5,
@@ -50,9 +56,9 @@ class _AddNoteFormState extends State<AddNoteForm> {
               note = value;
             },
           ),
-          SizedBox(height: 12),
-          ColorListView(),
-          SizedBox(height: 15),
+          const SizedBox(height: 12),
+          const ColorListView(),
+          const SizedBox(height: 15),
           BlocBuilder<AddNoteCubit, AddNoteState>(
             builder: (context, state) {
               return CustomButton(
@@ -60,18 +66,18 @@ class _AddNoteFormState extends State<AddNoteForm> {
                 onPressed: () {
                   if (formKey.currentState!.validate()) {
                     formKey.currentState!.save();
-                    var dateFormat = DateFormat(
+                    final dateFormat = DateFormat(
                       'dd-MM-yyyy',
                     ).format(DateTime.now());
 
-                    var noteModel = NoteModel(
+                    final noteModel = NoteModel(
                       title: title ?? '',
                       note: note ?? '',
                       date: dateFormat.toString(),
                       color: addNoteCubit.currentColor.toARGB32(),
                     );
                     addNoteCubit.addNote(noteModel: noteModel);
-                    GetNotesCubit getNotesCubit = BlocProvider.of<GetNotesCubit>(context);
+                    final GetNotesCubit getNotesCubit = BlocProvider.of<GetNotesCubit>(context);
                     getNotesCubit.addNoteLocally(noteModel);
                   } else {
                     autovalidateMode = AutovalidateMode.always;
@@ -80,7 +86,7 @@ class _AddNoteFormState extends State<AddNoteForm> {
               );
             },
           ),
-          SizedBox(height: 15),
+          const SizedBox(height: 15),
         ],
       ),
     );

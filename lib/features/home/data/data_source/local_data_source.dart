@@ -42,7 +42,7 @@ class LocalDataSourceImpl extends LocalDataSource {
     return []; 
   }
   
-  List<NoteModel> notes = allNotes.sublist(startIndex, endIndex);
+  final List<NoteModel> notes = allNotes.sublist(startIndex, endIndex);
   
   return notes;
 }

@@ -20,7 +20,7 @@ class CustomButton extends StatelessWidget {
         ),
       
       ),
-      child: isLoading? CustomLoadingIndicator() :Text(StringsManager.addNote, style: TextStyle(color: Colors.black)),
+      child: isLoading? const CustomLoadingIndicator() :const Text(StringsManager.addNote, style: TextStyle(color: Colors.black)),
     );
   }
 }

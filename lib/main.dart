@@ -12,7 +12,7 @@ import 'package:notes_app_clean_arch/features/home/presentation/manager/get_note
 import 'package:notes_app_clean_arch/features/home/presentation/views/home_view.dart';
 
 void main() async {
-  Bloc.observer = SimpleBlocObserrver();
+  Bloc.observer = SimpleBlocObserver();
   await Hive.initFlutter();
   Hive.registerAdapter(NoteModelAdapter());
   await Hive.openBox<NoteModel>(ConstantsManager.notesBox);
@@ -47,3 +47,4 @@ class NotesApp extends StatelessWidget {
     );
   }
 }
+

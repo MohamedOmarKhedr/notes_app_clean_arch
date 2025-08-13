@@ -10,7 +10,7 @@ class GetNotesUseCase extends UseCase <List<NoteModel>,int>{
   GetNotesUseCase({required this.homeRepo});
   @override
   Future<Either<Failure, List<NoteModel>>> call([int? param]) async{
-    var notes =await homeRepo.getAllNotes(param!);
+    final notes =await homeRepo.getAllNotes(param!);
     return notes;
   }
   

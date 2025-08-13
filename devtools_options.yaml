@@ -1,3 +1,12 @@
 description: This file stores settings for Dart & Flutter DevTools.
 documentation: https://docs.flutter.dev/tools/devtools/extensions#configure-extension-enablement-states
 extensions:
+
+performance:
+  enable_widget_inspector: true
+  track_rebuilds: true
+  track_repaints: true
+memory:
+  heap_snapshot_interval: 5000 # كل 5 ثواني
+network:
+  enable_request_logging: true

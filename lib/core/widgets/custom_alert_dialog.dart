@@ -38,7 +38,6 @@ class CustomAlertDialog extends StatelessWidget {
       padding: const EdgeInsets.all(20.0),
       decoration: BoxDecoration(
         color: Colors.white, // لون خلفية الـ dialog
-        shape: BoxShape.rectangle,
         borderRadius: BorderRadius.circular(16.0),
         boxShadow: const [
           BoxShadow(

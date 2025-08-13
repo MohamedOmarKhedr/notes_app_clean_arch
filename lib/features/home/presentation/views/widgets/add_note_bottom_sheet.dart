@@ -40,7 +40,7 @@ class AddNoteBottomSheet extends StatelessWidget {
             // to avoid the user use the form when loading
             return AbsorbPointer(
               absorbing: state is AddNoteLoading,
-              child: SingleChildScrollView(child: const AddNoteForm()),
+              child: const SingleChildScrollView(child: AddNoteForm()),
             );
           },
         ),

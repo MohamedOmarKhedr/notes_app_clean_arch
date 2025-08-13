@@ -11,7 +11,7 @@ class UpdateNoteCubit extends Cubit<UpdateNoteState> {
 
   Future<void> updateNote({required NoteModel note}) async {
     emit(UpdateNoteLoading());
-    var result = await updateNoteUseCase.call(note);
+    final result = await updateNoteUseCase.call(note);
     result.fold(
       (failure) {
         emit(UpdateNoteFailure(errMessage: failure.errMessage));

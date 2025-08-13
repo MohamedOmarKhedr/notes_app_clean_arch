@@ -1,35 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SimpleBlocObserrver implements BlocObserver{
+// 1. تصحيح اسم الفئة (BlocObserver بدلاً من BlocObserrver)
+class SimpleBlocObserver implements BlocObserver {
   @override
-  void onChange(BlocBase bloc, Change change) {
-    debugPrint(change.toString());
+  void onChange(BlocBase<dynamic> bloc, Change<dynamic> change) {
+    debugPrint('Change in $bloc: $change');
   }
 
   @override
-  void onClose(BlocBase bloc) {
-    debugPrint('close: $bloc');
+  void onClose(BlocBase<dynamic> bloc) {
+    debugPrint('Closed: $bloc');
   }
 
   @override
-  void onCreate(BlocBase bloc) {
-    debugPrint('create: $bloc');
+  void onCreate(BlocBase<dynamic> bloc) {
+    debugPrint('Created: $bloc');
   }
 
   @override
-  void onError(BlocBase bloc, Object error, StackTrace stackTrace) {
-    // TODO: implement onError
+  void onError(BlocBase<dynamic> bloc, Object error, StackTrace stackTrace) {
+    debugPrint('Error in $bloc: $error\n$stackTrace');
   }
 
   @override
-  void onEvent(Bloc bloc, Object? event) {
-    // TODO: implement onEvent
+  void onEvent(Bloc<dynamic, dynamic> bloc, Object? event) {
+    debugPrint('Event in $bloc: $event');
   }
 
   @override
-  void onTransition(Bloc bloc, Transition transition) {
-    // TODO: implement onTransition
+  void onTransition(Bloc<dynamic, dynamic> bloc, Transition<dynamic, dynamic> transition) {
+    debugPrint('Transition in $bloc: $transition');
   }
-  
 }

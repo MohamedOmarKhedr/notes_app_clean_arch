@@ -27,12 +27,18 @@ class _NoteItemState extends State<NoteItem> {
   }
 
   @override
+  void dispose() {
+    deleteNoteCubit.close();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(
+          MaterialPageRoute<EditNoteView>(
             builder: (context) => BlocProvider(
               create: (context) =>
                   UpdateNoteCubit(getit.get<UpdateNoteUseCase>()),
@@ -82,7 +88,7 @@ class _NoteItemState extends State<NoteItem> {
                       },
                     );
                   },
-                  icon: Icon(Icons.delete),
+                  icon: const Icon(Icons.delete),
                 ),
               ),
             ),

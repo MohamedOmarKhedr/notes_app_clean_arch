@@ -23,7 +23,7 @@ class _EditNoteViewBodyState extends State<EditNoteViewBody> {
   late String title;
   late String note;
   late UpdateNoteCubit updateNoteCubit;
-  late NoteModel updatedNote;
+
   @override
   void initState() {
     title = widget.note.title;
@@ -35,12 +35,20 @@ class _EditNoteViewBodyState extends State<EditNoteViewBody> {
   }
 
   @override
+  void dispose() {
+    titleController.dispose();
+    noteController.dispose();
+    updateNoteCubit.close();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocListener<UpdateNoteCubit, UpdateNoteState>(
       listener: (context, state) {
         if (state is UpdateNoteSuccess) {
           Navigator.pop(context);
-          GetNotesCubit getNotesCubit = BlocProvider.of<GetNotesCubit>(context);
+          final GetNotesCubit getNotesCubit = BlocProvider.of<GetNotesCubit>(context);
           getNotesCubit.refreshList();
           ShowCustomSnackBar.showInfo(
             context: context,
@@ -65,7 +73,7 @@ class _EditNoteViewBodyState extends State<EditNoteViewBody> {
                 onPressed: () {
                   widget.note.title = titleController.text;
                   widget.note.note = noteController.text;
-                  updatedNote = widget.note;
+
                   updateNoteCubit.updateNote(note: widget.note);
                 },
               ),
@@ -93,3 +101,4 @@ class _EditNoteViewBodyState extends State<EditNoteViewBody> {
     );
   }
 }
+

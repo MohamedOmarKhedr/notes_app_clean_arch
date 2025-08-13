@@ -18,7 +18,7 @@ class GetNotesCubit extends Cubit<GetNotesState> {
       currentPageIndex = 1;
     }
 
-    var result = await getNotesUseCase.call(pageNumber);
+    final result = await getNotesUseCase.call(pageNumber);
     result.fold(
       (failure) {
         emit(GetNotesFailure(errMessage: failure.errMessage));

@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notes_app_clean_arch/features/home/presentation/manager/add_note_cubit/add_note_cubit.dart';
@@ -20,25 +22,39 @@ class _ColorListViewState extends State<ColorListView> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocBuilder<AddNoteCubit, AddNoteState>(
       builder: (context, state) {
         return SizedBox(
           height: 80,
-          child: ListView.builder(
-            itemCount: addNoteCubit.colors.length,
-            scrollDirection: Axis.horizontal,
-            itemBuilder: (context, index) {
-              return GestureDetector(
-                onTap: () {
-                  addNoteCubit.fetchCurrentIndex(index);
-                },
-                child: ColorItem(
-                  color: addNoteCubit.colors[index],
-                  isActive: addNoteCubit.currentIndex == index,
+          child: ScrollConfiguration(
+            behavior: ScrollConfiguration.of(context).copyWith(
+                  dragDevices: {
+                    PointerDeviceKind.touch,
+                    PointerDeviceKind.mouse,
+                    PointerDeviceKind.trackpad,
+                  },
                 ),
-              );
-            },
+            child: ListView.builder(
+              itemCount: addNoteCubit.colors.length,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) {
+                return GestureDetector(
+                  onTap: () {
+                    addNoteCubit.fetchCurrentIndex(index);
+                  },
+                  child: ColorItem(
+                    color: addNoteCubit.colors[index],
+                    isActive: addNoteCubit.currentIndex == index,
+                  ),
+                );
+              },
+            ),
           ),
         );
       },

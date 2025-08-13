@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notes_app_clean_arch/core/widgets/custom_error_widget.dart';
@@ -28,19 +30,24 @@ class _NotesListViewState extends State<NotesListView> {
     super.initState();
   }
 
+  @override
+  void dispose() {
+    scrollController.removeListener(scrollListener);
+    scrollController.dispose();
+    super.dispose();
+  }
+
   void scrollListener() async {
     if (!_isLoadingMore &&
-        scrollController.position.pixels >= 
-        scrollController.position.maxScrollExtent * 0.7) {
-      
-        _isLoadingMore = true;
+        scrollController.position.pixels >=
+            scrollController.position.maxScrollExtent * 0.7) {
+      _isLoadingMore = true;
 
-        await getNotesCubit.getAllNotes(
-          pageNumber: getNotesCubit.currentPageIndex++,
-        );
-        _isLoadingMore = false;
-      }
-    
+      await getNotesCubit.getAllNotes(
+        pageNumber: getNotesCubit.currentPageIndex++,
+      );
+      _isLoadingMore = false;
+    }
   }
 
   @override
@@ -59,15 +66,24 @@ class _NotesListViewState extends State<NotesListView> {
           if (state is GetNotesSuccess) {
             return Padding(
               padding: const EdgeInsets.symmetric(vertical: 12.0),
-              child: ListView.builder(
-                controller: scrollController,
-                padding: EdgeInsets.zero,
-                shrinkWrap: true,
-                itemCount: state.notes.length,
-                itemBuilder: (context, index) {
-                  final note = state.notes[index];
-                  return NoteItem(note: note);
-                },
+              child: ScrollConfiguration(
+                behavior: ScrollConfiguration.of(context).copyWith(
+                  dragDevices: {
+                    PointerDeviceKind.touch,
+                    PointerDeviceKind.mouse,
+                    PointerDeviceKind.trackpad,
+                  },
+                ),
+                child: ListView.builder(
+                  controller: scrollController,
+                  padding: EdgeInsets.zero,
+                  shrinkWrap: true,
+                  itemCount: state.notes.length,
+                  itemBuilder: (context, index) {
+                    final note = state.notes[index];
+                    return NoteItem(note: note);
+                  },
+                ),
               ),
             );
           } else if (state is GetNotesFailure) {

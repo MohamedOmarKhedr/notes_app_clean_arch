@@ -14,7 +14,7 @@ class ColorItem extends StatelessWidget {
         backgroundColor: color,
         child: Visibility(
           visible: isActive,
-          child: Icon(Icons.check, color: Colors.black, size: 30),
+          child: const Icon(Icons.check, color: Colors.black, size: 30),
         ),
       ),
     );

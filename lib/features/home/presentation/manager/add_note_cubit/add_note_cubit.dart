@@ -29,7 +29,7 @@ class AddNoteCubit extends Cubit<AddNoteState> {
   Future<void> addNote({required NoteModel noteModel}) async {
     emit(AddNoteLoading());
 
-    var result = await addNoteUseCase.call(noteModel);
+    final result = await addNoteUseCase.call(noteModel);
     result.fold(
       (failure) {
         emit(AddNoteFailure(errMessage: failure.errMessage));

@@ -12,7 +12,7 @@ class HomeRepoImpl extends HomeRepo {
   @override
   Future<Either<Failure, List<NoteModel>>> getAllNotes(int pageNumber) async {
     try {
-       var notes =await localDataSource.getAllNotes(pageNumber);
+       final notes =await localDataSource.getAllNotes(pageNumber);
        return right(notes);
     }catch (e) {
       if(e is HiveError) {

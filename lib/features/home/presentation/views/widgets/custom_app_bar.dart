@@ -12,7 +12,7 @@ class CustomAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(children: [
       Text(title,style: TextStyleManager.appNameTextStyle,),
-      Spacer(),
+      const Spacer(),
       CustomSearchIcon(icon: icon, onPressed: onPressed,),
       
     ],);
