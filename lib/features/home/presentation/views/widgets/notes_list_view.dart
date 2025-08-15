@@ -1,13 +1,14 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:notes_app_clean_arch/core/extensions/reponsive_extensions.dart';
+import 'package:notes_app_clean_arch/core/extensions/scroll_configuration_extension.dart';
 import 'package:notes_app_clean_arch/core/widgets/custom_error_widget.dart';
 import 'package:notes_app_clean_arch/core/widgets/custom_loading_indicator.dart';
 import 'package:notes_app_clean_arch/core/widgets/show_error_snack_bar.dart';
 import 'package:notes_app_clean_arch/features/home/presentation/manager/delete_note_cubit/delete_note_cubit.dart';
 import 'package:notes_app_clean_arch/features/home/presentation/manager/get_notes_cubit/get_notes_cubit.dart';
-import 'package:notes_app_clean_arch/features/home/presentation/views/widgets/note_item.dart';
+import 'package:notes_app_clean_arch/features/home/presentation/views/widgets/notes_list_view_disktop.dart';
+import 'package:notes_app_clean_arch/features/home/presentation/views/widgets/notes_list_view_mobile.dart';
 
 class NotesListView extends StatefulWidget {
   const NotesListView({super.key});
@@ -40,7 +41,7 @@ class _NotesListViewState extends State<NotesListView> {
   void scrollListener() async {
     if (!_isLoadingMore &&
         scrollController.position.pixels >=
-            scrollController.position.maxScrollExtent * 0.7) {
+            scrollController.position.maxScrollExtent * 0.9) {
       _isLoadingMore = true;
 
       await getNotesCubit.getAllNotes(
@@ -66,25 +67,16 @@ class _NotesListViewState extends State<NotesListView> {
           if (state is GetNotesSuccess) {
             return Padding(
               padding: const EdgeInsets.symmetric(vertical: 12.0),
-              child: ScrollConfiguration(
-                behavior: ScrollConfiguration.of(context).copyWith(
-                  dragDevices: {
-                    PointerDeviceKind.touch,
-                    PointerDeviceKind.mouse,
-                    PointerDeviceKind.trackpad,
-                  },
+              child: SingleChildScrollView(
+                controller: scrollController,
+                physics: const BouncingScrollPhysics(),
+                padding: EdgeInsets.zero,
+                child: Visibility(
+                  visible: context.deviceType == DeviceType.desktop,
+                  replacement: NotesListViewMobile(notes: state.notes),
+                  child: NotesListViewDisktop(notes: state.notes),
                 ),
-                child: ListView.builder(
-                  controller: scrollController,
-                  padding: EdgeInsets.zero,
-                  shrinkWrap: true,
-                  itemCount: state.notes.length,
-                  itemBuilder: (context, index) {
-                    final note = state.notes[index];
-                    return NoteItem(note: note);
-                  },
-                ),
-              ),
+              ).withScrollConfiguration(),
             );
           } else if (state is GetNotesFailure) {
             return CustomErrorWidget(errMessage: state.errMessage);

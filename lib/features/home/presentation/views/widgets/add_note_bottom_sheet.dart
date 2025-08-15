@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:notes_app_clean_arch/core/extensions/scroll_configuration_extension.dart';
 import 'package:notes_app_clean_arch/core/utils/service_locator.dart';
 import 'package:notes_app_clean_arch/core/widgets/show_error_snack_bar.dart';
 import 'package:notes_app_clean_arch/features/home/domain/use_cases/add_note_use_case.dart';
@@ -40,7 +41,7 @@ class AddNoteBottomSheet extends StatelessWidget {
             // to avoid the user use the form when loading
             return AbsorbPointer(
               absorbing: state is AddNoteLoading,
-              child: const SingleChildScrollView(child: AddNoteForm()),
+              child: const SingleChildScrollView(child: AddNoteForm()).withScrollConfiguration(),
             );
           },
         ),

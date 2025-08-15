@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -11,7 +12,17 @@ import 'package:notes_app_clean_arch/features/home/presentation/manager/delete_n
 import 'package:notes_app_clean_arch/features/home/presentation/manager/get_notes_cubit/get_notes_cubit.dart';
 import 'package:notes_app_clean_arch/features/home/presentation/views/home_view.dart';
 
+import 'package:window_size/window_size.dart';
+
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  if (defaultTargetPlatform == TargetPlatform.windows ||
+      defaultTargetPlatform == TargetPlatform.linux ||
+      defaultTargetPlatform == TargetPlatform.macOS) {
+    setWindowMinSize(const Size(400, 400));
+  }
+
   Bloc.observer = SimpleBlocObserver();
   await Hive.initFlutter();
   Hive.registerAdapter(NoteModelAdapter());
@@ -47,4 +58,3 @@ class NotesApp extends StatelessWidget {
     );
   }
 }
-

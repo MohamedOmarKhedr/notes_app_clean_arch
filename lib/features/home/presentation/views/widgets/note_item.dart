@@ -28,7 +28,6 @@ class _NoteItemState extends State<NoteItem> {
 
   @override
   void dispose() {
-    deleteNoteCubit.close();
     super.dispose();
   }
 

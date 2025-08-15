@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:notes_app_clean_arch/core/extensions/scroll_configuration_extension.dart';
 import 'package:notes_app_clean_arch/core/utils/constants_manager.dart';
 import 'package:notes_app_clean_arch/core/utils/strings_manager.dart';
 import 'package:notes_app_clean_arch/core/widgets/show_error_snack_bar.dart';
@@ -96,7 +97,7 @@ class _EditNoteViewBodyState extends State<EditNoteViewBody> {
               ),
             ],
           ),
-        ),
+        ).withScrollConfiguration(),
       ),
     );
   }

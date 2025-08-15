@@ -25,7 +25,7 @@ class LocalDataSourceImpl extends LocalDataSource {
 
   final allNotes = notesBox.values.toList().reversed.toList();
 
-  const int pageSize = 10; 
+  const int pageSize = 20; 
   final int totalNotes = allNotes.length;
   final int startIndex = pageNumber * pageSize;
 

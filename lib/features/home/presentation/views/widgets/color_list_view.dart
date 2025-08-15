@@ -1,7 +1,6 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:notes_app_clean_arch/core/extensions/scroll_configuration_extension.dart';
 import 'package:notes_app_clean_arch/features/home/presentation/manager/add_note_cubit/add_note_cubit.dart';
 import 'package:notes_app_clean_arch/features/home/presentation/views/widgets/color_item.dart';
 
@@ -32,30 +31,21 @@ class _ColorListViewState extends State<ColorListView> {
       builder: (context, state) {
         return SizedBox(
           height: 80,
-          child: ScrollConfiguration(
-            behavior: ScrollConfiguration.of(context).copyWith(
-                  dragDevices: {
-                    PointerDeviceKind.touch,
-                    PointerDeviceKind.mouse,
-                    PointerDeviceKind.trackpad,
-                  },
+          child: ListView.builder(
+            itemCount: addNoteCubit.colors.length,
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (context, index) {
+              return GestureDetector(
+                onTap: () {
+                  addNoteCubit.fetchCurrentIndex(index);
+                },
+                child: ColorItem(
+                  color: addNoteCubit.colors[index],
+                  isActive: addNoteCubit.currentIndex == index,
                 ),
-            child: ListView.builder(
-              itemCount: addNoteCubit.colors.length,
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) {
-                return GestureDetector(
-                  onTap: () {
-                    addNoteCubit.fetchCurrentIndex(index);
-                  },
-                  child: ColorItem(
-                    color: addNoteCubit.colors[index],
-                    isActive: addNoteCubit.currentIndex == index,
-                  ),
-                );
-              },
-            ),
-          ),
+              );
+            },
+          ).withScrollConfiguration(),
         );
       },
     );

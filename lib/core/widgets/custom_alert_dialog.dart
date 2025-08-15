@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notes_app_clean_arch/core/extensions/reponsive_extensions.dart';
 
 // هذا هو ويدجت التنبيه المخصص
 class CustomAlertDialog extends StatelessWidget {
@@ -8,7 +9,7 @@ class CustomAlertDialog extends StatelessWidget {
   final String? cancelButtonText;
   final VoidCallback onConfirm;
   final VoidCallback? onCancel;
-  final bool isCancelButton; // يمكن أن يكون إلغاء العملية اختياريًا
+  final bool isCancelButton;
 
   const CustomAlertDialog({
     super.key,
@@ -36,6 +37,9 @@ class CustomAlertDialog extends StatelessWidget {
   Widget _buildDialogContent(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(20.0),
+      constraints: BoxConstraints(
+        maxWidth: context.width * (context.deviceType == DeviceType.desktop ? 0.5 : 0.8),
+        ),
       decoration: BoxDecoration(
         color: Colors.white, // لون خلفية الـ dialog
         borderRadius: BorderRadius.circular(16.0),
